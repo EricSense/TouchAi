@@ -1,4 +1,4 @@
-
+// Updated to remove Claude API and use local gesture responses
 
 import React from 'react';
 
