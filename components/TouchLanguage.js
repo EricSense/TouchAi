@@ -869,18 +869,23 @@ export default function TouchLanguage() {
           }}
         >
           {/* Gesture trail visualization */}
-          {gestureTrail.length > 1 && (
-            <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }} aria-hidden="true">
-              <path
-                d={`M ${gestureTrail.filter(p => p && typeof p.x === 'number' && typeof p.y === 'number').map(p => `${p.x},${p.y}`).join(' L ')}`}
-                stroke="rgba(167, 139, 250, 0.6)"
-                strokeWidth="3"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          )}
+          {gestureTrail.length > 1 && (() => {
+            const validPoints = gestureTrail.filter(p => p && typeof p.x === 'number' && typeof p.y === 'number');
+            if (validPoints.length < 2) return null;
+            
+            return (
+              <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }} aria-hidden="true">
+                <path
+                  d={`M ${validPoints.map(p => `${p.x},${p.y}`).join(' L ')}`}
+                  stroke="rgba(167, 139, 250, 0.6)"
+                  strokeWidth="3"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            );
+          })()}
           
           {touchPoints.length === 0 && (
             <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
