@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@remix-run/dev": "latest",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
