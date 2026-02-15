@@ -806,7 +806,7 @@ export default function TouchLanguage() {
                   <div style={{ fontSize: '0.75rem', opacity: 0.75 }}>{msg.intent}</div>
                   {msg.pressure && (
                     <div style={{ fontSize: '0.625rem', opacity: 0.5, marginTop: '0.25rem' }}>
-                      Pressure: {msg.pressure} • Velocity: {msg.velocity?.toFixed(2) || 'N/A'}
+                      Pressure: {msg.pressure} • Velocity: {typeof msg.velocity === 'number' ? msg.velocity.toFixed(2) : 'N/A'}
                     </div>
                   )}
                 </>
@@ -870,9 +870,9 @@ export default function TouchLanguage() {
         >
           {/* Gesture trail visualization */}
           {gestureTrail.length > 1 && (
-            <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
+            <svg style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }} aria-hidden="true">
               <path
-                d={`M ${gestureTrail.map(p => `${p.x},${p.y}`).join(' L ')}`}
+                d={`M ${gestureTrail.filter(p => p && typeof p.x === 'number' && typeof p.y === 'number').map(p => `${p.x},${p.y}`).join(' L ')}`}
                 stroke="rgba(167, 139, 250, 0.6)"
                 strokeWidth="3"
                 fill="none"
