@@ -13,4 +13,9 @@
     "react-dom": "latest",
     "lucide-react": "latest"
   }
+  ,"devDependencies":{
+    "tailwindcss":"latest",
+    "postcss":"latest",
+    "autoprefixer":"latest"
+  }
 }
